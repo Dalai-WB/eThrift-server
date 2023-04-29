@@ -6,6 +6,7 @@ exports.findAll = asyncHandler(async (req, res, next) => {
   // if (!data) {
   //     throw new myError(`Produc`, 400);
   //   }
+
   res.status(200).send({ success: true, data: data });
 });
 exports.findById = asyncHandler(async (req, res, next) => {

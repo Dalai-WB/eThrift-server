@@ -6,7 +6,7 @@ const ProductSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  image: { type: String, required: true },
+  image: { type: [String], required: true },
   owner: { type: mongoose.Schema.ObjectId, required: true },
   isSold: { type: Boolean, required: true },
 });
