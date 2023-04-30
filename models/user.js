@@ -5,6 +5,7 @@ const UserSchema = mongoose.Schema({
   picture: { type: String, require: true },
   phone_number: { type: Number, required: true },
   email: { type: String, required: true },
+  wishlist: { type: [mongoose.Schema.ObjectId], required: true },
 });
 const User = mongoose.model("User", UserSchema);
 module.exports = User;
