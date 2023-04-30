@@ -42,3 +42,14 @@ exports.removeFromWishlist = asyncHandler(async (req, res, next) => {
   await User.findOneAndUpdate({ _id: id }, { wishlist: newWishlist });
   res.status(200).send({ success: true });
 });
+exports.getFromWishlist = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  const prevData = await User.findById(id);
+  const prevWishlist = prevData.wishlist;
+  let returnWishlist = [];
+  prevWishlist.map((item) => {
+    newData = mongoose.Types.ObjectId(item);
+    returnWishlist.push(newData);
+  });
+  res.status(200).send({ success: true, data: returnWishlist });
+});
