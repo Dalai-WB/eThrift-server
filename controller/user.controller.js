@@ -19,6 +19,7 @@ exports.create = asyncHandler(async (req, res, next) => {
 exports.addToWishlist = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
   let newData = req.body.id;
+  newData = mongoose.Types.ObjectId(req.body.id);
   const prevData = await User.findById(id);
   const prevWishlist = prevData.wishlist;
   const newWishlist = [...prevWishlist, newData];
@@ -48,7 +49,9 @@ exports.getFromWishlist = asyncHandler(async (req, res, next) => {
   const prevWishlist = prevData.wishlist;
   let returnWishlist = [];
   prevWishlist.map((item) => {
-    newData = { id:item, ownerName: prevData.fname };
+    newData = mongoose.Types.ObjectId(item);
+    newData = Product.findById(newData);
+    newData = { ...newData, ownerName: prevData.fname };
     returnWishlist.push(newData);
   });
   res.status(200).send({ success: true, data: returnWishlist });
