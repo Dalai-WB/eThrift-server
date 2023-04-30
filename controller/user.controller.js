@@ -1,4 +1,5 @@
 const asyncHandler = require("../middleware/asyncHandler");
+const Product = require("../models/product");
 const User = require("../models/user");
 const mongoose = require("mongoose");
 exports.findAll = asyncHandler(async (req, res, next) => {
@@ -49,6 +50,8 @@ exports.getFromWishlist = asyncHandler(async (req, res, next) => {
   let returnWishlist = [];
   prevWishlist.map((item) => {
     newData = mongoose.Types.ObjectId(item);
+    newData = Product.findById(newData);
+    newData = { ...prevWishlist, ownerName: prevData.fname };
     returnWishlist.push(newData);
   });
   res.status(200).send({ success: true, data: returnWishlist });
