@@ -19,7 +19,6 @@ exports.create = asyncHandler(async (req, res, next) => {
 exports.addToWishlist = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
   let newData = req.body.id;
-  newData = mongoose.Types.ObjectId(req.body.id);
   const prevData = await User.findById(id);
   const prevWishlist = prevData.wishlist;
   const newWishlist = [...prevWishlist, newData];
